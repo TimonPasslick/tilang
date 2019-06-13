@@ -1,0 +1,40 @@
+#This is a really early design that will probably change drastically.
+
+#This is the type definition for a 2D vector type.
+#The compiler doesn't care if something is a constant or a type.
+#But you probably do, so you're encouraged or maybe forced to let type names start with a capital letter.
+#Each 2D vector is addable and has:
+const Vec2: Addable has
+    # -an addable component type
+    const Component: Addable
+    # -2 components called x and y
+    x: Component, y: Component
+    # -an action that happens automatically when it's no longer used, only if it's a variable, ...
+    func drop()
+        #... which just prints "Drop point"
+        print("Drop point")
+    # -and a definiton of addition that is required because each 2D vector is addable.
+    Addable.add(self, other) = Vec2 with
+        x = self.x + other.x
+        y = self.y + other.y
+
+#The origin of the 2D plane is (0|0).
+#Because it's a constant, it doesn't depend on runtime state and can't be changed.
+const origin = Vec2 with x = 0, y = 0
+
+#This is an overload of the default function.
+#If the argument is not the Vec2 type, the compiler tries to find another overload.
+overload default(Vec2)
+    #It returns the origin because that is the "defaultiest" 2D vector.
+    return origin
+
+#This is the main function that's called when the program starts.
+func main()
+    #The variable foo is the default 2D vector, so the origin.
+    #Because it's a variable and not a value, it can be changed.
+    var foo = default(Vec2)
+    #We do in fact change it by adding (2|3) to it.
+    foo += Vec2 with x = 2, y = 3
+    #The value bar is the current value of foo.
+    #Because it's a value, it can't be changed.
+    val bar = foo
