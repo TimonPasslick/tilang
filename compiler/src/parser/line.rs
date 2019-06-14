@@ -1,4 +1,4 @@
-use super::{ErrorKind, ErrorKind::*};
+use super::{ErrorKind, ErrorKind::TooManyTabs};
 use std::convert::TryFrom;
 
 pub struct Error {
@@ -9,32 +9,33 @@ pub struct Error {
 pub struct ParsedLine {} //Only partially parsed, of course, some errors can only be detected when knowing multiple lines.
 
 pub fn parse_line(line: &str) -> Result<ParsedLine, Error> {
-    match indentation(line) {
-        Ok(indented_line) => unimplemented!(),
-        Err(kind) => Err(Error { column: 0, kind }),
-    }
+    let indented = indentation(line)?;
+    unimplemented!()
 }
 
-struct IndentedLine<'a> {
-    pub tabs: u8, //If you have more than 255 tabs at the start of a line, there is something wrong with your code.
-    pub text: &'a str,
+enum IndentedLine<'a> {
+    WithCode {
+        tabs: u8, //If you have more than 255 tabs at the start of a line, there is something wrong with your code.
+        text: &'a str,
+    },
+    Empty,
 }
 
-fn indentation(line: &str) -> Result<IndentedLine, ErrorKind> {
+fn indentation(line: &str) -> Result<IndentedLine, Error> {
     for (i, &byte) in line.as_bytes().iter().enumerate() {
         if byte != b'\t' {
-            return Ok(IndentedLine {
+            return Ok(IndentedLine::WithCode {
                 tabs: if let Ok(count) = u8::try_from(i) {
                     count
                 } else {
-                    return Err(TooManyTabs);
+                    return Err(Error {
+                        column: 0,
+                        kind: TooManyTabs,
+                    });
                 },
                 text: &line[i as usize..],
             });
         }
     }
-    Ok(IndentedLine {
-        tabs: line.len() as u8,
-        text: &line[line.len() - 1..], //empty string, defined like this for consistency and to avoid lifetime problems
-    })
+    Ok(IndentedLine::Empty)
 }
