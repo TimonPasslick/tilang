@@ -11,11 +11,13 @@ pub enum ErrorKind {
 
 impl PrintableError for ErrorKind {
     fn id(&self) -> error::ID {
+        use ErrorKind::*;
         match self {
             TooManyTabs => 0,
         }
     }
     fn msg(&self) -> String {
+        use ErrorKind::*;
         match self {
             TooManyTabs => String::from(
                 "\
