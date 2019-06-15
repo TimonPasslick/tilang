@@ -1,18 +1,25 @@
 #This is a really early design that will probably change drastically.
 
-vec2 : addable has
-    comp : addable #component
-    x : comp, y : comp
-    func init(x : comp, y : comp) = vec2 with x, y
-    func init() = vec2 with x = 0, y = 0
-    func drop()
-        print("Drop point")
-    addable.add(self, other) = vec2 with
-        x = self.x + other.x
-        y = self.y + other.y
+const Vec2: Addable has
 
-func main() int32
-    var foo = vec2 with x = 1, y = 0
-    foo += vec2 with x = 2, y = 2
-    val bar = foo
-    return 0
+	const Component: Addable
+
+	x: Component, y: Component
+
+	func drop()
+		print("Drop point")
+
+	Addable.add(self, other) = Vec2 with
+	x = self.x + other.x
+	y = self.y + other.y
+
+
+const origin = Vec2 with x = 0, y = 0
+
+overload default(Vec2)
+	return origin
+
+func main()
+	var foo = default(Vec2)
+	foo += Vec2 with x = 2, y = 3
+	val bar = foo
