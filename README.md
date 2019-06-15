@@ -1,4 +1,4 @@
 # tilang
-my own programming language
+Tilang will be a high level language that compiles to wasm.
 
-Don't use it, it's currently a hobby project.
+Don't use it, it's still under construction.
