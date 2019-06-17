@@ -1,13 +1,10 @@
 #This is a really early design that will probably change drastically.
 
-const Vec2: Addable has
+type Vec2: Addable has
 
 	const Component: Addable
 
 	x: Component, y: Component
-
-	func drop()
-		print("Drop point")
 
 	Addable.add(self, other) = Vec2 with
 	x = self.x + other.x
