@@ -6,7 +6,7 @@
 #Each 2D vector is addable and has:
 type Vec2: Addable has
 	# -an addable component type
-	const Component: Addable
+	type Component: Addable
 	# -2 components called x and y
 	x: Component, y: Component
 	# -and a definiton of addition that is required because each 2D vector is addable.
