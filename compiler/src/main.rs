@@ -1,4 +1,4 @@
 mod error;
-mod parser;
+mod lexer;
 
 fn main() {}
