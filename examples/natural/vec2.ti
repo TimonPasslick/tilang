@@ -7,8 +7,8 @@ type Vec2: Addable has
 	x: Component, y: Component
 
 	Addable.add(self, other) = Vec2 with
-	x = self.x + other.x
-	y = self.y + other.y
+		x = self.x + other.x
+		y = self.y + other.y
 
 
 const origin = Vec2 with x = 0, y = 0
