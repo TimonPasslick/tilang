@@ -17,12 +17,14 @@ I might add different encodings like UTF16 in the future and `AsciiChar` is part
 
 `Float` represents a **number** that you can write with a **finite amount** of decimal, hexadecimal or binary **digits**, for example 3.14 or 42.
 
-`Range` represents a **left-inclusive** and **right-exclusive** range between two `Int`s.
+`Range` represents a **left-inclusive** and **right-exclusive** range between two `Int`egers.
 
-## Sum types
+## Algebraic data types
+
+### Sum types
 
 You can express that something is **either** of type `A` **or** of type `B` by writing `A | B`.
 
-## Product types
+### Product types
 
 You can express that something is **both** of type `A` **and** of type `B` by writing `A & B`.
