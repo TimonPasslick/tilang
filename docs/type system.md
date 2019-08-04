@@ -1,16 +1,28 @@
 # The Tilang type system
 
-Disclaimer: This isn't implemented yet.
+**Disclaimer**: This is **not implemented** yet.
 
 ## Primitive types
 
-There are three primitives in Tilang: `Bool`, `Char` and `Num`.
+There are a following primitive types in Tilang: `Bool`, `Char`, `Int`, `Float` and `Range`.
+
+Primitive types are the types that are **always there, even if you don't use the standard library**.
 
 `Bool` represents `true` or `false`.
 
-`Char` represents a character or, to be more precise, a UTF8 code point.
+`Char` represents a **character** or, to be more precise, a **UTF8 code point**.
 I might add different encodings like UTF16 in the future and `AsciiChar` is part of the standard library.
 
-`Num` represents a real number.
-This means that it doesn't represent a float or double. A `Num` is infinitely precise (theoretically, RAM is limited).
-Using `Num`, other numeric types are constructed in the standard library. These range from `Nat` or `Complex` to faster types that correspond to wasm primitives like `i32` and `f64`.
+`Int` represents an **integer**.
+
+`Float` represents a **number** that you can write with a **finite amount** of decimal, hexadecimal or binary **digits**, for example 3.14 or 42.
+
+`Range` represents a **left-inclusive** and **right-exclusive** range between two `Int`s.
+
+## Sum types
+
+You can express that something is **either** of type `A` **or** of type `B` by writing `A | B`.
+
+## Product types
+
+You can express that something is **both** of type `A` **and** of type `B` by writing `A & B`.
