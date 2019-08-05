@@ -21,15 +21,15 @@ A `Float` is a **number that you can represent in base 2**, 10 or 16.
 
 A `Range` is a **left-inclusive** and **right-exclusive** range between two `Int`egers.
 
-A `Tuple` is an **ordered list of values with individual types**.
+A `Tuple` is an **ordered list of values with individual types with a fixed length**.
 
 ### Data structures
 
-`Array` is an **ordered list** of values of some type. You can set **upper and lower boundaries for its length**.
+An `Array` is an **ordered list** of values of some common type. You can set **upper and lower boundaries for its length**.
 
-`Set` is an **unordered** `Array`. That means that there is no distinction between equal elements, so **all elements must be different**.
+A `Set` is an **unordered** `Array`. That means that there is no distinction between equal elements, so **all elements must be different**.
 
-`Map` is a `Set` of **key and value** pairs. Only the **keys are relevant for equality**.
+A `Map` is a `Set` of **key and value** pairs. Only the **keys are relevant for equality**.
 
 ## Algebraic data types
 
@@ -43,6 +43,15 @@ Object types are **sets of named types or named values that can both be unspecif
 
 Only values of object types must be fully specified, not the object types themselves.
 
+## Newtypes
+
+If you want a type `A` that **can be used just as another type** `B` but is **distinct**, you can write `<specifier/s> A = new B`.
+You can **cast** a value `x` of type `A` **back** to `B` **explicitly** by writing `x as B`.
+
+## Functions
+
+## IO and global variables
+
 ## Values as types
 
 Values can be used as types that only have one possible state, which is the value.
@@ -51,6 +60,6 @@ Only types with multiple states must be annotated with the `type` specifier beca
 
 ## Subtype relationships
 
-## Functions
+### `Anything`, the supertype of all types
 
-## IO and global variables
+## Mutable run-time types
