@@ -33,9 +33,17 @@ A `Map` is a `Set` of **key and value** pairs. Only the **keys are relevant for 
 
 ## Algebraic data types
 
-You can express that something is **either** of type `A` **or** of type `B` by writing `A | B`.
+You can express that something is **either** of type `A` **or** of type `B` by writing `A | B`. A type like this is called **sum type**.
 
-You can express that something is **both** of type `A` **and** of type `B` by writing `A & B`.
+You can **remove an option** from a sum type by writing `(A | B) without B`. This also works with primitive types, `Int without 0` is possible, for example. A type like this is called **difference type**.
+
+You can express that something is **both** of type `A` **and** of type `B` by writing `A & B`. A type like this is called **product type**.
+
+## The unconstructible type
+
+What's `A without A`? It's `!`, of course. ( ; `!` is the unconstructible type, which is fancy wording that says that **there is no value of this type**. The unconstructible type is **useful for expressing that a function never returns**.
+
+By the way, that means that `A | !` is equal to `A` just as `A without !` and `A & !` is equal to `!`.
 
 ## Object types
 
@@ -50,7 +58,15 @@ You can **cast** a value `x` of type `A` **back** to `B` **explicitly** by writi
 
 ## Functions
 
-## IO and global variables
+A function **takes a `Tuple` as an argument** and returns `Anything` (see further down). The argument and return type are part of a function type but not the only possible parts as you will see in the next paragraph.
+
+There are named and anonymous functions. Anonymous functions are all distinct because it's very hard to come up with an algorithm that proves that two functions have equivalent behavior.
+
+## IO and static variables
+
+There are imported and exported functions in wasm. Unfortunately, I don't know enough about wasm yet to design the types of these functions. But I know that these functions are IO functions and that this is part of their type definitions. **Any function that calls an IO function is also an IO function.**
+
+All variables can be static. A static variable is never deleted. **If a function reads or changes a static variable directly or indirectly, it's a state function.**
 
 ## Values as types
 
