@@ -12,14 +12,13 @@ Primitive types are the types that are **always there, even if you don't use the
 
 A `Bool` is `true` or `false`.
 
-A `Char` is a **character** or, to be more precise, a **UTF8 code point**.
-I might add different encodings like UTF16 in the future and `AsciiChar` is part of the standard library.
+A `Char` is a **character** or, to be more precise, a **Unicode slalar value**.
 
 An `Int` is an **integer**.
 
 A `Float` is a **number that you can represent in base 2**, 10 or 16.
 
-A `Range` is a **left-inclusive** and **right-exclusive** range between two `Int`egers.
+A `Range` is a **left-inclusive** and **right-exclusive** range between two `Int`egers. It can have no upper bound.
 
 A `Tuple` is an **ordered list of values with individual types with a fixed length**.
 
@@ -64,7 +63,7 @@ There are named and anonymous functions. Anonymous functions are all distinct be
 
 ## IO and static variables
 
-There are imported and exported functions in wasm. Unfortunately, I don't know enough about wasm yet to design the types of these functions. But I know that these functions are IO functions and that this is part of their type definitions. **Any function that calls an IO function is also an IO function.**
+There are imported and exported functions in wasm. Unfortunately, I don't know enough about wasm yet to design the types of these functions in Tilang. But I know that these functions are IO functions and that this is part of their type definitions. **Any function that calls an IO function is also an IO function.**
 
 All variables can be static. A static variable is never deleted. **If a function reads or changes a static variable directly or indirectly, it's a state function.**
 
