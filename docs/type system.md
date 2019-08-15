@@ -117,3 +117,16 @@ The `Array` rule also applys for `Set`s and `Map`s.
 A function is a subtype of another function if its argument and return types are subtypes of the other argument and return types and if it doesn't do IO or access static variables when the other function doesn't.
 
 ## Mutable run-time types
+
+There are `var type` and `val type`. That makes stuff like this possible:
+
+```ti
+var type X = Int
+for _ in ..times #times is defined somewhere else
+	X = X | (X, X)
+val x: X = 5
+```
+
+This makes the type system more expressive by deferring some type checks to run-time.
+
+The compiler tries its best to still catch type errors at compile time but there's no guarantee anymore if you use a mutable run-time types.
