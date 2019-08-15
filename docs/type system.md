@@ -12,7 +12,7 @@ Primitive types are the types that are **always there, even if you don't use the
 
 A `Bool` is `true` or `false`.
 
-A `Char` is a **character** or, to be more precise, a **Unicode slalar value**.
+A `Char` is a **character** or, to be more precise, a **Unicode scalar value**.
 
 An `Int` is an **integer**.
 
