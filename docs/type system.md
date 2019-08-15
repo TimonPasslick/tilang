@@ -46,9 +46,12 @@ By the way, that means that `A | !` is equal to `A` just as `A without !` and `A
 
 ## Object types
 
-Object types are **sets of named types or named values that can both be unspecified** and they are **named themselves**.
+Object types are **sets of named types or named values that can both be unspecified**. They can be **named themselves**.
 
 Only values of object types must be fully specified, not the object types themselves.
+
+Named object types are nominal types, so they are only equal if they have the same name.
+Unnamed object types are structural types, so they are equal if the sets are equal.
 
 ## Newtypes
 
@@ -75,6 +78,42 @@ Only types with multiple states must be annotated with the `type` specifier beca
 
 ## Subtype relationships
 
-### `Anything`, the supertype of all types
+If `A` is a subtype of `B`, we write `A: B`. You can read this as:
+
+"Each `A` is a `B`."
+
+"Each `A` can be used as a `B`."
+
+"Each value of type `A` is implicitly convertible to type `B`."
+
+The third interpretation is technically wrong in Tilang because each value of type `A` is both of type `A` and type `B`, so it doesn't need to be converted in the first place.
+
+What exactly does it mean for a value `x` to be of type `A`? It simply means `x: A`.
+
+### Fundamental laws
+
+Here are the fundamental laws that are used to check for subtype relationships:
+
+If `A: B` and `B: C`, then `A: C`.
+
+`A: A`
+
+`!: A`
+
+`A: Anything` (`Anything` is in Tilang what `Object` is in Java.)
+
+`A: A | B`
+
+`A & B: A`
+
+`Int: Float`
+
+A `Tuple` is a subtype of another `Tuple` if it has the same length and each field type is a subtype of the corresponding field type.
+
+An `Array` is a subtype of another array if its lower bound isn't lower than the other lower bound and its upper bound isn't higher than the other upper bound (The highest upper bound is no upper bound.) and if its element type is a subtype of the other element type.
+
+The `Array` rule also applys for `Set`s and `Map`s.
+
+A function is a subtype of another function if its argument and return types are subtypes of the other argument and return types and if it doesn't do IO or access static variables when the other function doesn't.
 
 ## Mutable run-time types
