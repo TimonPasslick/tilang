@@ -108,15 +108,15 @@ If `A: B` and `B: C`, then `A: C`.
 
 `Int: Float`
 
-A `Tuple` is a subtype of another `Tuple` if it has the same length and each field type is a subtype of the corresponding field type.
+A `Tuple` is a subtype of another `Tuple` if it has the **same length** and each field type is a **subtype of the corresponding field type**.
 
-An `Array` is a subtype of another array if its lower bound isn't lower than the other lower bound and its upper bound isn't higher than the other upper bound (The highest upper bound is no upper bound.) and if its element type is a subtype of the other element type.
+An `Array` is a subtype of another array if its lower bound is **not lower than the other lower bound** and its upper bound is **not higher than the other upper bound** (The highest upper bound is no upper bound.) and if its element type is a **subtype of the other element type**.
 
 The `Array` rule also applys for `Set`s and `Map`s.
 
-Unnamed objects are subtypes of another unnamed object if they implement at least all of its fields and if all these fields are subtypes of the other fields.
+Unnamed objects are subtypes of another unnamed object if they **implement at least all of its fields** and if all these fields are **subtypes of the other fields**.
 
-A function is a subtype of another function if its argument and return types are subtypes of the other argument and return types and if it doesn't do IO or access static variables when the other function doesn't.
+A function is a subtype of another function if its argument type is a **supertype of the other argument type** and if its return type is a **subtype of the other return type** and if it **doesn't do IO or access static variables when the other function doesn't**.
 
 ## Mutable run-time types
 
