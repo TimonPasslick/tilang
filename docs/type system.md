@@ -114,6 +114,8 @@ An `Array` is a subtype of another array if its lower bound isn't lower than the
 
 The `Array` rule also applys for `Set`s and `Map`s.
 
+Unnamed objects are subtypes of another unnamed object if they implement at least all of its fields and if all these fields are subtypes of the other fields.
+
 A function is a subtype of another function if its argument and return types are subtypes of the other argument and return types and if it doesn't do IO or access static variables when the other function doesn't.
 
 ## Mutable run-time types
