@@ -18,7 +18,7 @@ An `Int` is an **integer**.
 
 A `Float` is a **number that you can represent in base 2**, 10 or 16.
 
-A `Range` is a **left-inclusive** and **right-exclusive** range between two `Int`egers. It can have no upper bound.
+A `Range` is a **left-inclusive** and **right-exclusive** range between two `Int`egers. It can have no upper bound. You can use it to restrict possible `Int`eger values.
 
 A `Tuple` is an **ordered list of values with individual types with a fixed length**.
 
@@ -60,7 +60,7 @@ You can **cast** a value `x` of type `A` **back** to `B` **explicitly** by writi
 
 ## Functions
 
-A function **takes a `Tuple` as an argument** and returns `Anything` (see further down). The argument and return type are part of a function type but not the only possible parts as you will see in the next paragraph.
+A function **takes a `Tuple` as an argument** and returns `Any` type (see further down). The argument and return type are part of a function type but not the only possible parts as you will see in the next paragraph.
 
 There are named and anonymous functions. Anonymous functions are all distinct because it's very hard to come up with an algorithm that proves that two functions have equivalent behavior.
 
@@ -100,11 +100,13 @@ If `A: B` and `B: C`, then `A: C`.
 
 `!: A`
 
-`A: Anything` (`Anything` is in Tilang what `Object` is in Java.)
+`A: Any` (`Any` is in Tilang what `Object` is in Java.)
 
 `A: A | B`
 
 `A & B: A`
+
+`Range: Int`
 
 `Int: Float`
 
