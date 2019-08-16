@@ -49,9 +49,19 @@ By the way, that means that `A | !` is equal to `A` just as `A without !` and `A
 Object types are **sets of named types or named values that can both be unspecified**. They can be **named themselves**.
 
 Only values of object types must be fully specified, not the object types themselves.
+You can even specify them partly using a `with` expression that can restrict fields to subtypes.
+`with` expressions return another type, of course they don't modify the object itself. They're also used to fully specify objects.
 
 Named object types are nominal types, so they are only equal if they have the same name.
 Unnamed object types are structural types, so they are equal if the sets are equal.
+
+Note that constant items that don't specialise a nonconstant item from a supertype aren't accessibe from subtypes.
+That includes most functions because they're constant by default. There's one exception:
+
+### Methods
+
+Methods are special functions that take `self` as the first parameter and that you can only declare in object type definitions.
+The type of `self` is the object type that the method is defined in.
 
 ## Newtypes
 
@@ -63,6 +73,10 @@ You can **cast** a value `x` of type `A` **back** to `B` **explicitly** by writi
 A function **takes a `Tuple` as an argument** and returns `Any` type (see further down). The argument and return type are part of a function type but not the only possible parts as you will see in the next paragraph.
 
 There are named and anonymous functions. Anonymous functions are all distinct because it's very hard to come up with an algorithm that proves that two functions have equivalent behavior.
+
+You can `overload` functions, including methods.
+The argument tuple of the `overload` can't be a subtype or supertype of any other argument tuple that already exists for the function.
+The return type must be a subtype of the original return type.
 
 ## IO and static variables
 
@@ -119,6 +133,12 @@ The `Array` rule also applys for `Set`s and `Map`s.
 Unnamed objects are subtypes of another unnamed object if they **implement at least all of its fields** and if all these fields are **subtypes of the other fields**.
 
 A function is a subtype of another function if its argument type is a **supertype of the other argument type** and if its return type is a **subtype of the other return type** and if it **doesn't do IO or access static variables when the other function doesn't**.
+
+### Inheritance
+
+If you want to inherit from a type `T`, `T & YourStructuralObjectType` comes close.
+The only difference to the inheritance you know from other languages is that the "inherited" type is structural and you probably don't want that.
+So there's special syntax that makes the inherited type nominal and looks more like typical inheritance syntax, without the weird ampersand.
 
 ## Mutable run-time types
 
