@@ -6,7 +6,7 @@ In this document, the term value doesn't refer to the `val` specifier but to non
 
 ## Primitive types
 
-There are a following primitive types in Tilang: `Bool`, `Char`, `Int`, `Float`, `Range`, `Tuple`, `Array`, `Set` and `Map`.
+There are a following primitive types in Tilang: `Bool`, `Char`, `Int`, `Float`, `Range`, `Array`, `Set` and `Map`.
 
 Primitive types are the types that are **always there, even if you don't use the standard library**.
 
@@ -19,8 +19,6 @@ An `Int` is an **integer**.
 A `Float` is a **number that you can represent in base 2**, 10 or 16.
 
 A `Range` is a **left-inclusive** and **right-exclusive** range between two `Int`egers. It can have no upper bound. You can use it to restrict possible `Int`eger values.
-
-A `Tuple` is an **ordered list of values with individual types with a fixed length**.
 
 ### Data structures
 
@@ -69,6 +67,8 @@ If you want a type `A` that **can be used just as another type** `B` but is **di
 You can **cast** a value `x` of type `A` **back** to `B` **explicitly** by writing `x as B`.
 
 ## Functions
+
+**TODO: switch from tuple arguments to new (named) arguments**
 
 A function **takes a `Tuple` as an argument** and returns `Any` type (see further down). The argument and return type are part of a function type but not the only possible parts as you will see in the next paragraph.
 
@@ -124,8 +124,6 @@ If `A: B` and `B: C`, then `A: C`.
 
 `Int: Float`
 
-A `Tuple` is a subtype of another `Tuple` if it has the **same length** and each field type is a **subtype of the corresponding field type**.
-
 An `Array` is a subtype of another array if its lower bound is **not lower than the other lower bound** and its upper bound is **not higher than the other upper bound** (The highest upper bound is no upper bound.) and if its element type is a **subtype of the other element type**.
 
 The `Array` rule also applys for `Set`s and `Map`s.
@@ -147,7 +145,7 @@ There are `var type` and `val type`. That makes stuff like this possible:
 ```ti
 var type X = Int
 for _ in ..times #times is defined somewhere else
-	X = X | (X, X)
+    X = X | (X, X)
 val x: X = 5
 ```
 
