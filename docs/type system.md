@@ -70,12 +70,12 @@ You can **cast** a value `x` of type `A` **back** to `B` **explicitly** by writi
 
 **TODO: switch from tuple arguments to new (named) arguments**
 
-A function **takes a `Tuple` as an argument** and returns `Any` type (see further down). The argument and return type are part of a function type but not the only possible parts as you will see in the next paragraph.
+A function **takes a fixed finite amount of arguments with different types** and returns `Any` type (see further down). The argument and return types are part of a function type but not the only possible parts as you will see in the next paragraph. Arguments can be associated both with their names and with their positions.
 
 There are named and anonymous functions. Anonymous functions are all distinct because it's very hard to come up with an algorithm that proves that two functions have equivalent behavior.
 
 You can `overload` functions, including methods.
-The argument tuple of the `overload` can't be a subtype or supertype of any other argument tuple that already exists for the function.
+The arguments of the `overload` can't be a subtype or supertype of any other corresponding arguments that already exist for the function. There must always be exactly one corresponding argument in the original definition for each `overload` argument, and the other way around.
 The return type must be a subtype of the original return type.
 
 ## IO and static variables
@@ -130,7 +130,7 @@ The `Array` rule also applys for `Set`s and `Map`s.
 
 Unnamed objects are subtypes of another unnamed object if they **implement at least all of its fields** and if all these fields are **subtypes of the other fields**.
 
-A function is a subtype of another function if its argument type is a **supertype of the other argument type** and if its return type is a **subtype of the other return type** and if it **doesn't do IO or access static variables when the other function doesn't**.
+A function is a subtype of another function if its argument types are **supertypes of the other corresponding argument types** and if its return type is a **subtype of the other return type** and if it **doesn't do IO or access static variables when the other function doesn't**.
 
 ### Inheritance
 
