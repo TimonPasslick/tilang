@@ -68,8 +68,6 @@ You can **cast** a value `x` of type `A` **back** to `B` **explicitly** by writi
 
 ## Functions
 
-**TODO: switch from tuple arguments to new (named) arguments**
-
 A function **takes a fixed finite amount of arguments with different types** and returns `Any` type (see further down). The argument and return types are part of a function type but not the only possible parts as you will see in the next paragraph. Arguments can be associated both with their names and with their positions.
 
 There are named and anonymous functions. Anonymous functions are all distinct because it's very hard to come up with an algorithm that proves that two functions have equivalent behavior.
