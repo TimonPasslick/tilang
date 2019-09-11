@@ -10,7 +10,7 @@ type Vec2: Addable has
 	# -2 components called x and y
 	x: Component, y: Component
 	# -and a definiton of addition that is required because each 2D vector is addable.
-	Addable.add(self, other) = Vec2 with
+	Addable.sum(self, other) = Vec2 with
 		x = self.x + other.x
 		y = self.y + other.y
 
