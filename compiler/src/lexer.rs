@@ -15,6 +15,7 @@ pub type LexError = Error<LexErrorKind>;
 pub enum LexErrorKind {
     TooManyTabs,
     TooManyBytes,
+    LeadingSpace,
 }
 use LexErrorKind::*;
 
@@ -27,6 +28,7 @@ impl PrintableError for LexErrorKind {
         match self {
             TooManyTabs => 0,
             TooManyBytes => 1,
+            LeadingSpace => 3,
         }
     }
     fn msg(&self) -> String {
@@ -41,6 +43,9 @@ It's likely that you should split up your logic into more functions.",
 There are more than 2^16-1 bytes in this line.
 Please split it up.",
             ),
+            LeadingSpace => String::from(
+                "You may not indent with spaces (yet), and putting spaces behind indentation gives you nicer formatting but can confuse the reader."
+            )
         }
     }
 }
@@ -57,6 +62,13 @@ fn indentation(line: &str) -> Result<IndentedLine, LexError> {
         .enumerate()
         .find_map(|(i, b)| if b != b'\t' { Some(i) } else { None })
         .unwrap_or(0);
+
+    if line.as_bytes()[tab_count] == b' ' {
+        return Err(LexError {
+            column: tab_count as u16,
+            kind: LeadingSpace,
+        });
+    }
 
     Ok(IndentedLine {
         tabs: match u8::try_from(tab_count) {
@@ -148,7 +160,12 @@ impl<'a> TokenStream<'a> {
     }
     fn parse_num(&mut self, radix: u8) -> Token<'a> {
         let mut result: BigUint = zero();
-        for &digit in self.line.as_bytes().iter().take_while(|&&byte| byte > b'0' && byte < b'0' + radix) {
+        for &digit in self
+            .line
+            .as_bytes()
+            .iter()
+            .take_while(|&&byte| byte > b'0' && byte < b'0' + radix)
+        {
             result *= radix;
             result += digit;
         }
@@ -156,11 +173,10 @@ impl<'a> TokenStream<'a> {
     }
     fn symbol_match(&mut self, symbol: &str) -> bool {
         if
-            //special case for 1 byte
-            (symbol.len() == 1 && self.line.as_bytes()[0] == symbol.as_bytes()[0]) 
+        //special case for 1 byte
+        (symbol.len() == 1 && self.line.as_bytes()[0] == symbol.as_bytes()[0])
             //general case
             || (self.line.len() >= symbol.len() && &self.line[..symbol.len()] == symbol)
-        
         {
             self.advance(symbol.len());
             return true;
