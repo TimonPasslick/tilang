@@ -131,14 +131,12 @@ pub struct TokenStream<'a> {
 impl<'a> TryFrom<IndentedLine<'a>> for TokenStream<'a> {
     type Error = LexError;
     fn try_from(line: IndentedLine<'a>) -> Result<Self, LexError> {
-        match u16::try_from(line.text.len()) {
-            Ok(_) => (),
-            Err(_) => {
-                return Err(Error {
-                    column: 0,
-                    kind: TooManyBytes,
-                })
-            }
+        //ensure that indices can be u16
+        if let Err(_) = u16::try_from(line.text.len()) {
+            return Err(Error {
+                column: 0,
+                kind: TooManyBytes,
+            });
         };
         Ok(Self {
             line: line.text,
